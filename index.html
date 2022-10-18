@@ -32,6 +32,24 @@
       </div>
 
       <div class="input-group">
+        <label>Password
+          <i class="fa fa-info-circle" data-title="Password should be at least 6 characters 
+            which contain at least one lowercase letter, 
+            one uppercase letter, 
+            one numeric digit, 
+            and one special character"></i>
+        </label>
+        <input type="password" placeholder="Enter your password" id="password" onkeyup="validatePassword()">
+        <span id="passwordError"></span>
+      </div>
+
+      <div class="input-group">
+        <label>Confirm password</label>
+        <input type="password" placeholder="Confirm password" id="confirmPassword" onkeyup="validateConfirmPassword()" disabled="true">
+        <span id="confirmPasswordError"></span>
+      </div>
+
+      <div class="input-group">
         <label>Your Message</label>
         <textarea rows="5" placeholder="Enter your message" id="contactMessage" onkeyup="validateMessage()"></textarea>
         <span id="messageError"></span>

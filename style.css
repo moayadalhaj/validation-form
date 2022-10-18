@@ -91,3 +91,31 @@ form button {
 .input-group span i {
     color: seagreen;
 }
+
+
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+[data-title]:after {
+    content: attr(data-title);
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    position: absolute;
+    padding: 10px 10px;
+    border-radius: 10px;
+    top: 0;
+    left: 100%;
+    white-space: wrap;
+    box-shadow: 1px 1px 3px #222222;
+    opacity: 0;
+    z-index: 99999;
+    visibility: hidden;
+}
+
+[data-title] {
+    position: relative;
+}

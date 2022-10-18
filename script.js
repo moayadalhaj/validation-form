@@ -1,15 +1,18 @@
-var nameError = document.getElementById('nameError');
-var phoneError = document.getElementById('phoneError');
-var emailError = document.getElementById('emailError');
-var messageError = document.getElementById('messageError');
-var submitError = document.getElementById('submitError');
+let nameError = document.getElementById('nameError');
+let phoneError = document.getElementById('phoneError');
+let emailError = document.getElementById('emailError');
+let messageError = document.getElementById('messageError');
+let submitError = document.getElementById('submitError');
+let passwordError = document.getElementById('passwordError');
+let confirmPasswordError = document.getElementById('confirmPasswordError');
+
 
 const validateName = () => {
-    var name = document.getElementById('contactName').value;
+    let name = document.getElementById('contactName').value;
     if (name.length == 0) {
         nameError.textContent = "Name is required";
         return false;
-    } else if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+    } else if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]{1,}/)) {
         nameError.textContent = "Write full name";
         return false;
     }
@@ -19,7 +22,7 @@ const validateName = () => {
 }
 
 const validatePhone = () => {
-    var phone = document.getElementById('contactPhone').value;
+    let phone = document.getElementById('contactPhone').value;
 
     if (phone.length == 0) {
         phoneError.textContent = "Phone No. is required";
@@ -37,7 +40,7 @@ const validatePhone = () => {
 }
 
 const validateEmail = () => {
-    var email = document.getElementById('contactEmail').value;
+    let email = document.getElementById('contactEmail').value;
 
     if (email.length == 0) {
         emailError.textContent = "Email is required";
@@ -52,9 +55,9 @@ const validateEmail = () => {
 }
 
 const validateMessage = () => {
-    var message = document.getElementById('contactMessage').value;
-    var req = 30;
-    var left = req - message.length;
+    let message = document.getElementById('contactMessage').value;
+    let req = 30;
+    let left = req - message.length;
 
     if (left > 0) {
         messageError.textContent = left + " more characters required";
@@ -65,8 +68,42 @@ const validateMessage = () => {
     return true;
 }
 
+const validatePassword = () => {
+    let password = document.getElementById('password').value;
+    let confirmPassword = document.getElementById('confirmPassword');
+    confirmPassword.disabled = true;
+
+    if (password.length == 0) {
+        passwordError.textContent = "Password is required";
+        return false;
+    } else if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/)) {
+        passwordError.textContent = "Password invalid";
+        return false;
+    }
+
+    passwordError.innerHTML = '<i class="fas fa-check-circle"></i';
+    confirmPassword.disabled = false
+    return true;
+}
+
+const validateConfirmPassword = () => {
+    let confirmPassword = document.getElementById('confirmPassword').value;
+    let password = document.getElementById('password').value;
+
+    if (confirmPassword.length == 0) {
+        confirmPasswordError.textContent = "Password is required";
+        return false;
+    } else if (confirmPassword != password) {
+        confirmPasswordError.textContent = "Password does not match";
+        return false;
+    }
+
+    confirmPasswordError.innerHTML = '<i class="fas fa-check-circle"></i';
+    return true;
+}
+
 const validateForm = () => {
-    if (!validateName() | !validatePhone() | !validateEmail() | !validateMessage()) {
+    if (!validateName() | !validatePhone() | !validateEmail() | !validateMessage() | !validatePassword()) {
         submitError.style.display = "block";
         submitError.textContent = "Please fix error to submit";
         setTimeout(() => {
